@@ -5,7 +5,7 @@
 class Animal:public IEntity{
 public:
     Animal(const int16_t& health ,const uint16_t& damage);
-    bool atack();
+    bool atack(const std::shared_ptr<IAtackable>& other);
     bool move();
     bool takeDamage(const int16_t& damage);
     void toString();

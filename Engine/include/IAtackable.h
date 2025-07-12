@@ -3,10 +3,10 @@
 #include <memory>
 
 class IAtackable{
-private:
+protected:
     uint16_t ID;
     int16_t health;
 public:
     virtual ~IAtackable() = 0;
-    virtual void takeDamage(const uint16_t& damage);
+    virtual void takeDamage(const uint16_t& damage) = 0;
 };
