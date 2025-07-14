@@ -2,11 +2,12 @@
 #include "Utils.h"
 #include <iostream>
 
-Animal::Animal(int16_t health ,uint16_t damage){
+Animal::Animal(int16_t health ,uint16_t damage, std::pair<int,int> location){
     this->ID=Utils::getID();
     this->damage=damage;
     this->level_multiplier=1;
     this->health=health;
+    this->location=std::make_pair(location.first, location.second);
 
     this->random_values_size=10;
     if(this->random_values_size>0){
@@ -37,6 +38,7 @@ Animal::Animal(const Animal& other){
     this->health=other.health;
     this->damage=other.damage;
     this->level_multiplier=other.level_multiplier;
+    this->location=std::make_pair(other.location.first, other.location.second);
     this->random_vector=other.random_vector;
     this->random_unique_ptr=(other.random_unique_ptr? std::make_unique<int>(*other.random_unique_ptr) : nullptr); //copy the value 
     random_values_size=other.random_values_size;
@@ -56,6 +58,7 @@ Animal& Animal::operator=(const Animal& other){
     this->health=other.health;
     this->damage=other.damage;
     this->level_multiplier=other.level_multiplier;
+    this->location=std::make_pair(other.location.first, other.location.second);
     this->random_vector=other.random_vector;
     this->random_unique_ptr=(other.random_unique_ptr? std::make_unique<int>(*other.random_unique_ptr) : nullptr); //copy the value 
 
@@ -81,6 +84,7 @@ Animal::Animal(Animal&& other) noexcept
     this->health=other.health;
     this->damage=other.damage;
     this->level_multiplier=other.level_multiplier;
+    this->location=std::make_pair(other.location.first, other.location.second);
     random_values_size=other.random_values_size;
 
     random_vector = std::move(other.random_vector);
@@ -98,6 +102,7 @@ Animal& Animal::operator=(Animal&& other) noexcept{
     this->health=other.health;
     this->damage=other.damage;
     this->level_multiplier=other.level_multiplier;
+    this->location=std::make_pair(other.location.first, other.location.second);
     random_vector = std::move(other.random_vector);
     random_unique_ptr = std::move(other.random_unique_ptr);
 
@@ -120,14 +125,18 @@ bool Animal::atack(const std::shared_ptr<IAtackable>& other){
     return true;
 }
 
-bool Animal::move(){
-
+bool Animal::move(std::pair<int,int> new_location){
+    this->location=std::make_pair(new_location.first, new_location.second);
 }
 
 bool Animal::takeDamage(const int16_t& damage){
-
+    this->health=(this->health-damage>0) ? this->health-damage : 0;
+    return (this->health>0);
 }
 
-void Animal::toString(){
-
+std::string Animal::toString(){
+    return ("Animal -> ID: "+ std::to_string(this->ID)+
+            "Level: " +std::to_string(this->level_multiplier)+
+            "Health: "+std::to_string(this->health)+
+            "Damage: "+std::to_string(this->damage));
 }

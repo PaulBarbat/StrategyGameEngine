@@ -16,10 +16,12 @@ struct Tile{
 };
 
 class IMap{
-private:
-    uint16_t ID;
+protected:
     std::vector<std::shared_ptr<Tile>> tiles;
+    uint16_t ID;
+    uint16_t size;
 public: 
     virtual ~IMap() = default;
+    virtual bool isTilePassable(const int& x,const int& y) const =0;
     virtual std::shared_ptr<Tile> getTile(const int& x, const int& y) const = 0;
 };
