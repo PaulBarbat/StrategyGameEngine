@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(StrategyGameEngine VERSION 0.1 LANGUAGE CXX)
+project(StrategyGameEngine LANGUAGE CXX VERSION 0.1 )
 
 #use C++17
 set(CMAKE_CXX_STANDARD 17)
