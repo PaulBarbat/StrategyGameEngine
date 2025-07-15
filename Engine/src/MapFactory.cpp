@@ -1,14 +1,16 @@
 #include "MapFactory.h"
 #include <string>
 #include <nlohmann/json.hpp>
+#include <fstream>  
+#include <iostream>
 
-using json = nlohman::json;
+using json = nlohmann::json;
 
 std::shared_ptr<IMap> MapFactory::createMap(std::string map_name){
     std::ifstream file("resources/maps.json");
     if(!file){
         std::cerr << "Could not open file: resources/maps.json" <<std::endl;
-        return;
+        return nullptr;
     }
 
     json j;
