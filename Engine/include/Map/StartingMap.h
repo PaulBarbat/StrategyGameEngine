@@ -4,7 +4,8 @@
 class StartingMap : public IMap{
 private:
 public:
-    StartingMap(uint16_t size);
+    StartingMap(const std::vector<std::shared_ptr<Tile>>& tiles);
+    StartingMap(std::vector<std::shared_ptr<Tile>>&& tiles);
     std::shared_ptr<Tile> getTile(const int& x, const int& y) const;
     bool isTilePassable(const int& x, const int& y) const; 
 };
