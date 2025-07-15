@@ -127,6 +127,7 @@ bool Animal::atack(const std::shared_ptr<IAtackable>& other){
 
 bool Animal::move(std::pair<int,int> new_location){
     this->location=std::make_pair(new_location.first, new_location.second);
+    return true;
 }
 
 bool Animal::takeDamage(const int16_t& damage){
