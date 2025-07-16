@@ -57,7 +57,7 @@ std::shared_ptr<IMap> MapFactory::createMap(const std::string& map_name){
     {
         if(element.contains("name") && element["name"] == map_name){
             if(element.contains("data")){
-                return std::make_shared<StartingMap>(StartingMap(std::move(parseMapData(element["data"]))));
+                return std::make_shared<StartingMap>(std::move(parseMapData(element["data"])));
             }
         }
     }
