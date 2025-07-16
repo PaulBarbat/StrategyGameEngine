@@ -3,7 +3,7 @@
 
 class Utils{
 private:
-    static uint16_t currentID;
+    inline static uint16_t currentID = 1;
 public:
     static uint16_t getID(){
         return currentID++;
