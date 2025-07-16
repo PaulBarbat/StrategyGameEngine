@@ -32,14 +32,6 @@ std::vector<std::shared_ptr<Tile>> MapFactory::parseMapData(const std::string& d
         }
         values.push_back(std::make_shared<Tile>(Tile{true,std::nullopt, t}));
     }
-    std::cout<<"In parse data: "<<std::endl;
-    int size=static_cast<uint16_t>(std::sqrt(values.size()));
-    for(int i=0; i<size; ++i){
-        for(int j=0; j<size; ++j){
-            std::cout<<static_cast<int>(values.at(i*size+j).get()->terainType)<<" ";
-        }
-        std::cout<<std::endl;
-    }
     return values;
 }
 
@@ -57,10 +49,7 @@ std::shared_ptr<IMap> MapFactory::createMap(const std::string& map_name){
     {
         if(element.contains("name") && element["name"] == map_name){
             if(element.contains("data")){
-                auto ret = std::make_shared<StartingMap>(std::move(parseMapData(element["data"])));
-                std::cout<<"in createMap"<<std::endl;
-                ret->printMap();
-                return ret;
+                return std::make_shared<StartingMap>(std::move(parseMapData(element["data"])));
             }
         }
     }
