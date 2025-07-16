@@ -8,4 +8,5 @@ public:
     StartingMap(std::vector<std::shared_ptr<Tile>>&& tiles);
     std::shared_ptr<Tile> getTile(const int& x, const int& y) const;
     bool isTilePassable(const int& x, const int& y) const; 
+    void printMap() const;
 };

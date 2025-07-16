@@ -6,7 +6,7 @@
 
 class MapFactory{
 private:
-    std::vector<std::shared_ptr<Tile>> parseMapData(const std::string& data)const;
+    static std::vector<std::shared_ptr<Tile>> parseMapData(const std::string& data);
 public:
-    std::shared_ptr<IMap> createMap(std::string map_name);
+    static std::shared_ptr<IMap> createMap(const std::string& map_name);
 };

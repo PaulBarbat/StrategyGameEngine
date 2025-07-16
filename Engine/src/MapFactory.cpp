@@ -7,7 +7,7 @@
 
 using json = nlohmann::json;
 
-std::vector<std::shared_ptr<Tile>> MapFactory::parseMapData(const std::string& data) const{
+std::vector<std::shared_ptr<Tile>> MapFactory::parseMapData(const std::string& data){
     std::istringstream iss(data);
     size_t value;
     iss >> value;
@@ -35,7 +35,7 @@ std::vector<std::shared_ptr<Tile>> MapFactory::parseMapData(const std::string& d
     return values;
 }
 
-std::shared_ptr<IMap> MapFactory::createMap(std::string map_name){
+std::shared_ptr<IMap> MapFactory::createMap(const std::string& map_name){
     std::ifstream file("resources/maps.json");
     if(!file){
         std::cerr << "Could not open file: resources/maps.json" <<std::endl;

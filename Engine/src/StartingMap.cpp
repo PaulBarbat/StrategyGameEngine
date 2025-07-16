@@ -20,3 +20,14 @@ std::shared_ptr<Tile> StartingMap::getTile(const int& x, const int& y) const{
 bool StartingMap::isTilePassable(const int& x, const int& y) const{
     return tiles.at(size*x+y)->passable;
 }
+
+void StartingMap::printMap() const{
+    std::cout<<"Here is the map:"<<std::endl;
+    for(int i=0; i<this->size; ++i){
+        for(int j=0; j<this->size; ++j){
+            std::cout<<this->tiles.at(i*size+j)<<" ";
+        }
+        std::cout<<std::endl;
+    }
+    std::cout<<std::endl;
+}
