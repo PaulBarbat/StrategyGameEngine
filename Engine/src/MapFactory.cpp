@@ -59,7 +59,7 @@ std::shared_ptr<IMap> MapFactory::createMap(const std::string& map_name){
             if(element.contains("data")){
                 auto ret = std::make_shared<StartingMap>(std::move(parseMapData(element["data"])));
                 std::cout<<"in createMap"<<std::endl;
-                *ret->printMap();
+                ret->printMap();
                 return ret;
             }
         }
