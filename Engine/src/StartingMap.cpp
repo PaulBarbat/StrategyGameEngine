@@ -9,7 +9,7 @@ StartingMap::StartingMap(const std::vector<std::shared_ptr<Tile>>& tiles){
 StartingMap::StartingMap(std::vector<std::shared_ptr<Tile>>&& tiles){
     std::cout<<"Constructor with rvalue param"<<std::endl;
     this->tiles = std::move(tiles);
-    this->size = static_cast<uint16_t>(std::sqrt(tiles.size()));
+    this->size = static_cast<uint16_t>(std::sqrt(this->tiles.size()));
     this->ID=Utils::getID();
 }
 
