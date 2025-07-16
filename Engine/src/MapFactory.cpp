@@ -33,7 +33,7 @@ std::vector<std::shared_ptr<Tile>> MapFactory::parseMapData(const std::string& d
         values.push_back(std::make_shared<Tile>(Tile{true,std::nullopt, t}));
     }
     std::cout<<"In parse data: "<<std::endl;
-    int size=static_cast<uint16_t>(std::sqrt(tiles.size()));
+    int size=static_cast<uint16_t>(std::sqrt(values.size()));
     for(int i=0; i<size; ++i){
         for(int j=0; j<size; ++j){
             std::cout<<static_cast<int>(values.at(i*size+j).get()->terainType)<<" ";
