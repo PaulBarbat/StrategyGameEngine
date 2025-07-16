@@ -23,6 +23,8 @@ bool StartingMap::isTilePassable(const int& x, const int& y) const{
 
 void StartingMap::printMap() const{
     std::cout<<"Here is the map:"<<std::endl;
+    std::cout<<"ID: "<<this->ID<<std::endl;
+    std::cout<<"Map size: "<<this->tiles.size()<<std::endl;
     for(int i=0; i<this->size; ++i){
         for(int j=0; j<this->size; ++j){
             std::cout<<this->tiles.at(i*size+j)<<" ";
