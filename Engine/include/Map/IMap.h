@@ -22,6 +22,6 @@ protected:
     uint16_t size;
 public: 
     virtual ~IMap() = default;
-    virtual bool isTilePassable(const int& x,const int& y) const =0;
-    virtual std::shared_ptr<Tile> getTile(const int& x, const int& y) const = 0;
+    virtual bool isTilePassable(const std::pair<int,int>& location) const =0;
+    virtual std::shared_ptr<Tile> getTile(const std::pair<int,int>& location) const = 0;
 };

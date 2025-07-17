@@ -2,12 +2,13 @@
 #include "Utils.h"
 #include <iostream>
 
-Animal::Animal(int16_t health ,uint16_t damage, std::pair<int,int> location){
+Animal::Animal(int16_t health ,uint16_t damage, std::pair<int,int> location, AnimalType type){
     this->ID=Utils::getID();
     this->damage=damage;
     this->level_multiplier=1;
     this->health=health;
     this->location=std::make_pair(location.first, location.second);
+    this->type=type;
 
     this->random_values_size=10;
     if(this->random_values_size>0){
@@ -39,6 +40,8 @@ Animal::Animal(const Animal& other){
     this->damage=other.damage;
     this->level_multiplier=other.level_multiplier;
     this->location=std::make_pair(other.location.first, other.location.second);
+    this->type=other.type;
+
     this->random_vector=other.random_vector;
     this->random_unique_ptr=(other.random_unique_ptr? std::make_unique<int>(*other.random_unique_ptr) : nullptr); //copy the value 
     random_values_size=other.random_values_size;
@@ -59,6 +62,8 @@ Animal& Animal::operator=(const Animal& other){
     this->damage=other.damage;
     this->level_multiplier=other.level_multiplier;
     this->location=std::make_pair(other.location.first, other.location.second);
+    this->type=other.type; 
+
     this->random_vector=other.random_vector;
     this->random_unique_ptr=(other.random_unique_ptr? std::make_unique<int>(*other.random_unique_ptr) : nullptr); //copy the value 
 
@@ -85,6 +90,8 @@ Animal::Animal(Animal&& other) noexcept
     this->damage=other.damage;
     this->level_multiplier=other.level_multiplier;
     this->location=std::make_pair(other.location.first, other.location.second);
+    this->type=other.type;
+
     random_values_size=other.random_values_size;
 
     random_vector = std::move(other.random_vector);
@@ -103,6 +110,8 @@ Animal& Animal::operator=(Animal&& other) noexcept{
     this->damage=other.damage;
     this->level_multiplier=other.level_multiplier;
     this->location=std::make_pair(other.location.first, other.location.second);
+    this->type=other.type;
+
     random_vector = std::move(other.random_vector);
     random_unique_ptr = std::move(other.random_unique_ptr);
 
@@ -135,9 +144,35 @@ bool Animal::takeDamage(const int16_t& damage){
     return (this->health>0);
 }
 
+uint16_t Animal::getID()const{
+    return this->ID;
+}
+
 std::string Animal::toString(){
     return ("Animal -> ID: "+ std::to_string(this->ID)+
+            "Type: "+animalTypeToString(this->type)+
             "Level: " +std::to_string(this->level_multiplier)+
             "Health: "+std::to_string(this->health)+
             "Damage: "+std::to_string(this->damage));
+}
+
+
+static std::string animalTypeToString(AnimalType type){
+    switch(type)
+    {
+        case AnimalType::Wolf:
+            return "Wolf";
+            break;
+        case AnimalType::Rabit:
+            return "Rabit";
+            break;
+        case AnimalType::Doe:
+            return "Doe";
+            break;
+        case AnimalType::Stag:
+            return "Stag";
+            break;
+        default:
+            return "Unknown";
+    }
 }

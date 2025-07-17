@@ -13,12 +13,20 @@ StartingMap::StartingMap(std::vector<std::shared_ptr<Tile>>&& tiles){
     this->ID=Utils::getID();
 }
 
-std::shared_ptr<Tile> StartingMap::getTile(const int& x, const int& y) const{
-    return tiles.at(size*x+y);
+bool StartingMap::ocupyTile(uint16_t ID, const std::pair<int,int>& location){
+    if(this->isTilePassable(location)){
+        tiles.at(size*location.first+location.second)->passable=false;
+        return true;
+    }
+    return false;
 }
 
-bool StartingMap::isTilePassable(const int& x, const int& y) const{
-    return tiles.at(size*x+y)->passable;
+std::shared_ptr<Tile> StartingMap::getTile(const std::pair<int,int>& location) const{
+    return tiles.at(size*location.first+location.second);
+}
+
+bool StartingMap::isTilePassable(const std::pair<int,int>& location) const{
+    return tiles.at(size*location.first+location.second)->passable;
 }
 
 void StartingMap::printMap() const{

@@ -15,14 +15,17 @@ std::vector<std::shared_ptr<Tile>> MapFactory::parseMapData(const std::string& d
     std::vector<std::shared_ptr<Tile>> values;
     values.reserve(value*value);
     Terain t;
+    bool passable;
 
     while(iss>>value){
+        passable=true;
         switch(value){
             case 0: 
                 t=Terain::Grass;
                 break;
             case 1:
                 t=Terain::Stone;
+                passable=false;
                 break;
             case 2:
                 t=Terain::Dirt;
@@ -30,7 +33,7 @@ std::vector<std::shared_ptr<Tile>> MapFactory::parseMapData(const std::string& d
             default:
                 throw std::runtime_error("Invalid element in json data"+std::to_string(value));
         }
-        values.push_back(std::make_shared<Tile>(Tile{true,std::nullopt, t}));
+        values.push_back(std::make_shared<Tile>(Tile{passable,std::nullopt, t}));
     }
     return values;
 }
