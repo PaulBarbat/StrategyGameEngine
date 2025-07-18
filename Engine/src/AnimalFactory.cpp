@@ -7,7 +7,7 @@ json AnimalFactory::loadAnimalData(){
 
     if(!file){
         std::cerr<<"Could not open file resources/animals.json"<<std::endl;
-        return nullptr;
+        return json(nullptr);
     }
 
     json j;
@@ -17,7 +17,7 @@ json AnimalFactory::loadAnimalData(){
 
 std::unique_ptr<Animal> AnimalFactory::createAnimal(AnimalType type,std::pair<int,int> location){
     static json animalData=AnimalFactory::loadAnimalData();
-    if(json==nullptr){
+    if(json.is_null()){
         throw std::runtime_error("Could not read json for animals");
     }
 
