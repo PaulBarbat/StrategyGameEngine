@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 
-static json AnimalFactory::loadAnimalData(){
+json AnimalFactory::loadAnimalData(){
     std::ifstream file("resources/animals.json");
 
     if(!file){
@@ -15,7 +15,7 @@ static json AnimalFactory::loadAnimalData(){
     return j;
 }
 
-static std::unique_ptr<Animal> AnimalFactory::createAnimal(AnimalType type,std::pair<int,int> location){
+std::unique_ptr<Animal> AnimalFactory::createAnimal(AnimalType type,std::pair<int,int> location){
     static json animalData=AnimalFactory::loadAnimalData();
     if(json==nullptr){
         throw std::runtime_error("Could not read json for animals");

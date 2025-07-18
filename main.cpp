@@ -13,7 +13,7 @@ int main()
     std::pair<int,int> location(10,10);
     std::unique_ptr<Animal> wolf;
     //logic that will go inside a function like placeAnimal
-    if(map->isTilePassable(location.first, location.second))
+    if(map->isTilePassable(location))
     {
         wolf=AnimalFactory::createAnimal(AnimalType::Stag, location);
         if(wolf)
