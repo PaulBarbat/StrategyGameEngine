@@ -22,10 +22,10 @@ private:
 public:
     ~Actor()=default;
     Actor(Race race);
-    Actor(const Actor& other);
-    Actor& operator=(const Actor& other);
-    Actor(Actor&& other);
-    Actor& operator=(Actor&& other);
+    //Actor(const Actor& other);
+    //Actor& operator=(const Actor& other);
+    //Actor(Actor&& other);
+    //Actor& operator=(Actor&& other);
     void takeDamage(const uint16_t& damage);
     uint16_t getID()const;
     bool atack(const std::shared_ptr<IAtackable>& other);

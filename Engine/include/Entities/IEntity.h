@@ -4,9 +4,9 @@
 
 class IEntity: public IAtackable{
 protected:
-    std::pair<int,int> location;
-    uint16_t damage;
-    uint16_t level_multiplier;
+    std::pair<int,int> m_location;
+    uint16_t m_damage;
+    uint16_t m_level_multiplier;
 public:
     virtual ~IEntity()=default;
     virtual bool atack(const std::shared_ptr<IAtackable>& other) = 0;

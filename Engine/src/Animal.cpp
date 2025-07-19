@@ -3,12 +3,12 @@
 #include <iostream>
 
 Animal::Animal(int16_t health ,uint16_t damage, std::pair<int,int> location, AnimalType type){
-    this->ID=Utils::getID();
-    this->damage=damage;
-    this->level_multiplier=1;
-    this->health=health;
-    this->location=std::make_pair(location.first, location.second);
-    this->type=type;
+    m_ID=Utils::getID();
+    m_damage=damage;
+    m_level_multiplier=1;
+    m_health=health;
+    m_location=std::make_pair(location.first, location.second);
+    m_type=type;
 
     this->random_values_size=10;
     if(this->random_values_size>0){
@@ -35,12 +35,12 @@ Animal::~Animal(){
 }
 
 Animal::Animal(const Animal& other){
-    this->ID=other.ID;//we might want to generate another id
-    this->health=other.health;
-    this->damage=other.damage;
-    this->level_multiplier=other.level_multiplier;
-    this->location=std::make_pair(other.location.first, other.location.second);
-    this->type=other.type;
+    m_ID=other.m_ID;//we might want to generate another id
+    m_health=other.m_health;
+    m_damage=other.m_damage;
+    m_level_multiplier=other.m_level_multiplier;
+    m_location=std::make_pair(other.m_location.first, other.m_location.second);
+    m_type=other.m_type;
 
     this->random_vector=other.random_vector;
     this->random_unique_ptr=(other.random_unique_ptr? std::make_unique<int>(*other.random_unique_ptr) : nullptr); //copy the value 
@@ -57,12 +57,12 @@ Animal::Animal(const Animal& other){
 Animal& Animal::operator=(const Animal& other){
     if(this == &other)
         return *this;
-    this->ID=other.ID;//here we might want to generate another ID
-    this->health=other.health;
-    this->damage=other.damage;
-    this->level_multiplier=other.level_multiplier;
-    this->location=std::make_pair(other.location.first, other.location.second);
-    this->type=other.type; 
+    m_ID=other.m_ID;//here we might want to generate another ID
+    m_health=other.m_health;
+    m_damage=other.m_damage;
+    m_level_multiplier=other.m_level_multiplier;
+    m_location=std::make_pair(other.m_location.first, other.m_location.second);
+    m_type=other.m_type; 
 
     this->random_vector=other.random_vector;
     this->random_unique_ptr=(other.random_unique_ptr? std::make_unique<int>(*other.random_unique_ptr) : nullptr); //copy the value 
@@ -85,12 +85,12 @@ Animal& Animal::operator=(const Animal& other){
 
 Animal::Animal(Animal&& other) noexcept
 {
-    this->ID=other.ID;//here we might want to generate another ID
-    this->health=other.health;
-    this->damage=other.damage;
-    this->level_multiplier=other.level_multiplier;
-    this->location=std::make_pair(other.location.first, other.location.second);
-    this->type=other.type;
+    m_ID=other.m_ID;//here we might want to generate another ID
+    m_health=other.m_health;
+    m_damage=other.m_damage;
+    m_level_multiplier=other.m_level_multiplier;
+    m_location=std::make_pair(other.m_location.first, other.m_location.second);
+    m_type=other.m_type;
 
     random_values_size=other.random_values_size;
 
@@ -105,12 +105,12 @@ Animal::Animal(Animal&& other) noexcept
 Animal& Animal::operator=(Animal&& other) noexcept{
     if(this == &other)
         return *this;
-    this->ID=other.ID;//here we might want to generate another ID
-    this->health=other.health;
-    this->damage=other.damage;
-    this->level_multiplier=other.level_multiplier;
-    this->location=std::make_pair(other.location.first, other.location.second);
-    this->type=other.type;
+    m_ID=other.m_ID;//here we might want to generate another ID
+    m_health=other.m_health;
+    m_damage=other.m_damage;
+    m_level_multiplier=other.m_level_multiplier;
+    m_location=std::make_pair(other.m_location.first, other.m_location.second);
+    m_type=other.m_type;
 
     random_vector = std::move(other.random_vector);
     random_unique_ptr = std::move(other.random_unique_ptr);
@@ -130,30 +130,30 @@ Animal& Animal::operator=(Animal&& other) noexcept{
 }
 
 bool Animal::atack(const std::shared_ptr<IAtackable>& other){
-    other->takeDamage(this->damage*this->level_multiplier);//TODO tweek scaling, it should scale but not just multiply with the level
+    other->takeDamage(m_damage*m_level_multiplier);//TODO tweek scaling, it should scale but not just multiply with the level
     return true;
 }
 
 bool Animal::move(std::pair<int,int> new_location){
-    this->location=std::make_pair(new_location.first, new_location.second);
+    m_location=std::make_pair(new_location.first, new_location.second);
     return true;
 }
 
 bool Animal::takeDamage(const int16_t& damage){
-    this->health=(this->health-damage>0) ? this->health-damage : 0;
-    return (this->health>0);
+    m_health=(m_health-damage>0) ? m_health-damage : 0;
+    return (m_health>0);
 }
 
 uint16_t Animal::getID()const{
-    return this->ID;
+    return m_ID;
 }
 
 std::string Animal::toString(){
-    return ("Animal -> ID: "+ std::to_string(this->ID)+
-            "Type: "+animalTypeToString(this->type)+
-            "Level: " +std::to_string(this->level_multiplier)+
-            "Health: "+std::to_string(this->health)+
-            "Damage: "+std::to_string(this->damage));
+    return ("Animal -> ID: "+ std::to_string(m_ID)+
+            "Type: "+animalTypeToString(m_type)+
+            "Level: " +std::to_string(m_level_multiplier)+
+            "Health: "+std::to_string(m_health)+
+            "Damage: "+std::to_string(m_damage));
 }
 
 

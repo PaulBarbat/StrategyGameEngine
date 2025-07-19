@@ -12,7 +12,7 @@ enum class AnimalType{
 
 class Animal:public IEntity{
 private:
-    AnimalType type;
+    AnimalType m_type;
     std::vector<std::shared_ptr<int>> random_vector;
     std::unique_ptr<int> random_unique_ptr;
     int** random_values;
