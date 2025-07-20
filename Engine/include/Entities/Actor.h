@@ -21,7 +21,14 @@ private:
     // int16_t health;
 public:
     ~Actor()=default;
-    Actor(Race race);
+    Actor(Race race,
+            uint16_t speed, 
+            bool hostile, 
+            /*std::vector<Ability> abilities,*/ 
+            std::pair<int,int> location, 
+            uint16_t damage,
+            uint16_t level,
+            int16_t health);
     //Actor(const Actor& other);
     //Actor& operator=(const Actor& other);
     //Actor(Actor&& other);
@@ -29,6 +36,6 @@ public:
     void takeDamage(const uint16_t& damage);
     uint16_t getID()const;
     bool atack(const std::shared_ptr<IAtackable>& other);
-    bool move();
+    bool move(std::pair<int,int> new_location);
     std::string toString();
 };
